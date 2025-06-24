@@ -1,18 +1,28 @@
-export function EditAvatar() {
+import { useState } from 'react';
+export function EditAvatar({onEditAvatar}) {
+  const [name, setName] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const handleSubmit = (e) => {
+            e.preventDefault();
+            onEditAvatar({ link: avatarUrl }); 
+        };
   return (
     <form
-      className="form--place"
-      name="card-form"
-      id="new-card-form"
+      className="form--avatar"
+      name="avatar-form"
+      id="new-avatar-form"
+      onSubmit={handleSubmit}
       noValidate
     >
       <label className="form__wrapper">
         <input
-          className="form__input form__input_type_card-name"
-          id="card-name"
+          className="form__input form__input_type_avatar-name"
+          id="avatar-name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           maxLength="30"
           minLength="1"
-          name="card-name"
+          name="avatar-name"
           placeholder="Nombre"
           required
           type="text"
@@ -22,9 +32,11 @@ export function EditAvatar() {
       <label className="form__wrapper">
         <input
           className="form__input form__input_type_url"
-          id="card-link"
+          id="avatar-link"
+          value={avatarUrl}
+          onChange={(e) => setAvatarUrl(e.target.value)}
           name="link"
-          placeholder="Acerca de mí"
+          placeholder="Link del avatar"
           required
           type="text"
         />

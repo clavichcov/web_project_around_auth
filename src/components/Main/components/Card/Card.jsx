@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Api, apiAcces } from '../../../../utils/Api.js';
 import {IMAGES} from '../../../../utils/constants.jsx';
 import { Popup } from '../Popup/Popup.jsx';
 import { DeleteCard } from "./DeleteCard.jsx";
 import { ImagePopup } from "../../../ImagePopup/ImagePopup.jsx";
-export function Card(props) {
-    const { name, link } = props.card;
+import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.jsx';
+export function Card({ card = {}, onDelete, onCardClick, onLike }) {
+    //const { card, onDelete, onCardClick, onLike } = props;
+    const { name = "", link = "", likes = [] } = card;
     const [popup, setPopup] = useState(null);
-    const { onDelete, onCardClick } = props;
     const deleteCard = { title: "Eliminar tarjeta?", children: <DeleteCard onConfirm={handleDelete} /> };
-    const [liked, setLiked] = useState(false);
+    const currentUser = useContext(CurrentUserContext);
+    const isLiked = card.isLiked || (card.likes || []).some(user => user?._id === currentUser?._id);
+    const cardLikeButtonClassName = `card__like-button ${isLiked ? 'card__like-button-active' : ''}`;
 
     function handleLike() {
-      setLiked(!liked);
+      onLike(card);
+      
     }
     function handleOpenPopup(popup) {
     setPopup(popup);
@@ -43,8 +48,8 @@ export function Card(props) {
         <button
           aria-label="Like card"
           type="button"
-          className={`card__like-button ${liked ? 'card__like-button-active' : ''}`}
-          onClick={() => handleLike()}
+          className={cardLikeButtonClassName}
+          onClick={handleLike}
         />
             
       </div>
