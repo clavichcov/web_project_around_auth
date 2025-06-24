@@ -7,7 +7,7 @@ import { EditProfile } from '../../components/EditProfile/EditProfile.jsx';
 import { EditAvatar } from '../../components/Avatar/EditAvatar.jsx';
 import { ImagePopup } from '../../components/ImagePopup/ImagePopup.jsx';
 import { Card } from '../Main/components/Card/Card.jsx';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext.jsx';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
 export function Main() {
     const [popup, setPopup] = useState(null);

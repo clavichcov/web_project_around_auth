@@ -4,7 +4,7 @@ import {IMAGES} from '../utils/constants.jsx';
 import { Main } from '../components/Main/Main.jsx';
 import { Footer } from './Footer/Footer.jsx';
 import { apiAcces } from '../utils/Api.js';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.jsx';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
