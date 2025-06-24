@@ -2,14 +2,14 @@ import { useState, useContext } from "react";
 import { Api, apiAcces } from '../../../../utils/Api.js';
 import {IMAGES} from '../../../../utils/constants.jsx';
 import { Popup } from '../Popup/Popup.jsx';
-import { DeleteCard } from "./DeleteCard.jsx";
+import { RemoveCard } from "../Popup/RemoveCard/RemoveCard.jsx";
 import { ImagePopup } from "../Popup/ImagePopup/ImagePopup.jsx";
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 export function Card({ card = {}, onDelete, onCardClick, onLike }) {
     //const { card, onDelete, onCardClick, onLike } = props;
     const { name = "", link = "", likes = [] } = card;
     const [popup, setPopup] = useState(null);
-    const deleteCard = { title: "Eliminar tarjeta?", children: <DeleteCard onConfirm={handleDelete} /> };
+    const deleteCard = { title: "Eliminar tarjeta?", children: <RemoveCard onConfirm={handleDelete} /> };
     const currentUser = useContext(CurrentUserContext);
     const isLiked = card.isLiked || (card.likes || []).some(user => user?._id === currentUser?._id);
     const cardLikeButtonClassName = `card__like-button ${isLiked ? 'card__like-button-active' : ''}`;
