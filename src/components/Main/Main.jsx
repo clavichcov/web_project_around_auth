@@ -2,10 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Api, apiAcces } from '../../utils/Api.js';
 import {IMAGES} from '../../utils/constants.jsx';
 import { Popup } from './components/Popup/Popup.jsx';
-import { NewCard } from '../../components/NewCard/NewCard.jsx';
-import { EditProfile } from '../../components/EditProfile/EditProfile.jsx';
-import { EditAvatar } from '../../components/Avatar/EditAvatar.jsx';
-import { ImagePopup } from '../../components/ImagePopup/ImagePopup.jsx';
+import { NewCard } from './components/Popup/NewCard/NewCard.jsx';
+import { EditProfile } from './components/Popup/EditProfile/EditProfile.jsx';
+import { EditAvatar } from './components/Popup/EditAvatar/EditAvatar.jsx';
+import { ImagePopup } from './components/Popup/ImagePopup/ImagePopup.jsx';
 import { Card } from '../Main/components/Card/Card.jsx';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 

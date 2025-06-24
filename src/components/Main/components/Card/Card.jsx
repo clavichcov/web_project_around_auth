@@ -3,7 +3,7 @@ import { Api, apiAcces } from '../../../../utils/Api.js';
 import {IMAGES} from '../../../../utils/constants.jsx';
 import { Popup } from '../Popup/Popup.jsx';
 import { DeleteCard } from "./DeleteCard.jsx";
-import { ImagePopup } from "../../../ImagePopup/ImagePopup.jsx";
+import { ImagePopup } from "../Popup/ImagePopup/ImagePopup.jsx";
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 export function Card({ card = {}, onDelete, onCardClick, onLike }) {
     //const { card, onDelete, onCardClick, onLike } = props;
