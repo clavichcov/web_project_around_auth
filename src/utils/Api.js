@@ -1,8 +1,11 @@
+
+
 export class Api {
-    constructor ({ baseUrl, headers }) {
+    constructor({ baseUrl, headers }) {
         this._baseUrl = baseUrl;
         this._headers = headers;
     }
+
 
     _makeRequest(endpoint, method, body = null) {
         const options = {
@@ -20,57 +23,69 @@ export class Api {
                     return res.json();
                 }
                 return Promise.reject(`Error: ${res.status}`);
-            })
-            .catch(error => {
-                console.error('Error en la petición:', error);
-                
             });
+        /*.catch(error => {
+            console.error('Error en la petición:', error);
+
+        });*/
 
     }
-    getUserInfo() { 
+    getUserInfo() {
         return this._makeRequest('/users/me', 'GET');
     }
 
-    updateUserInfo(name, about) { 
-        return this._makeRequest('/users/me', 'PATCH', {name, about});
-        
+    updateUserInfo(name, about) {
+        return this._makeRequest('/users/me', 'PATCH', { name, about });
+
     }
 
     updateUserAvatar(avatar) {
         return this._makeRequest('/users/me/avatar', 'PATCH', { avatar });
-        
+
     }
-    
+
     getInitialCards() {
         return this._makeRequest('/cards', 'GET');
-        
+
     }
-    
+
     addCard(name, link) {
         return this._makeRequest('/cards', 'POST', { name, link });
-        
+
     }
 
     deleteCard(cardId) {
         return this._makeRequest(`/cards/${cardId}`, 'DELETE');
-        
+
     }
 
     likeCard(cardId) {
         return this._makeRequest(`/cards/${cardId}/likes`, 'PUT');
-        
+
     }
     dislikeCard(cardId) {
         return this._makeRequest(`/cards/${cardId}/likes`, 'DELETE');
-        
+
     }
 
 }
-export const apiAcces = new Api ( {
+
+export default Api;
+
+/*const apiAcces = new Api({
+    baseUrl: "https://se-register-api.en.tripleten-services.com/v1",
+    headers: {
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+    }
+});*/
+
+
+/*export const apiAcces = new Api ( {
     baseUrl : "https://around-api.es.tripleten-services.com/v1",
     headers : {
         Authorization: "7d6605b4-d435-4af1-8d05-f10a54b28ea3",
         id: "4a1374e06fad7fc5cf6291ae",
         'Content-Type': 'application/json'
       }
-   });
+   });*/

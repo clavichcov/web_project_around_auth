@@ -1,4 +1,10 @@
-import { createContext, useState } from 'react';
+import React from "react";
+
+const CurrentUserContext = React.createContext();
+
+export default CurrentUserContext;
+
+/*import { createContext, useState } from 'react';
 
 export const CurrentUserContext = createContext({
   currentUser: null,
@@ -14,4 +20,4 @@ export const CurrentUserProvider = function({ children }) {
       children: children
     })
   );
-};
+};*/

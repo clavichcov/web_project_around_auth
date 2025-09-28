@@ -1,10 +1,8 @@
 import { useState, useContext } from "react";
-import { Api, apiAcces } from '../../../../utils/Api.js';
 import {IMAGES} from '../../../../utils/constants.jsx';
 import { Popup } from '../Popup/Popup.jsx';
 import { RemoveCard } from "../Popup/RemoveCard/RemoveCard.jsx";
-import { ImagePopup } from "../Popup/ImagePopup/ImagePopup.jsx";
-import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
+import  CurrentUserContext  from '../../../../contexts/CurrentUserContext.js';
 export function Card({ card = {}, onDelete, onCardClick, onLike }) {
     //const { card, onDelete, onCardClick, onLike } = props;
     const { name = "", link = "", likes = [] } = card;

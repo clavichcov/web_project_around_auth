@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Api, apiAcces } from '../../utils/Api.js';
+import  Api  from '../../utils/Api.js';
 import {IMAGES} from '../../utils/constants.jsx';
 import { Popup } from './components/Popup/Popup.jsx';
 import { NewCard } from './components/Popup/NewCard/NewCard.jsx';
@@ -7,7 +7,8 @@ import { EditProfile } from './components/Popup/EditProfile/EditProfile.jsx';
 import { EditAvatar } from './components/Popup/EditAvatar/EditAvatar.jsx';
 import { ImagePopup } from './components/Popup/ImagePopup/ImagePopup.jsx';
 import { Card } from '../Main/components/Card/Card.jsx';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import  CurrentUserContext  from '../../contexts/CurrentUserContext.js';
+import { setToken, getToken} from "../../utils/token";
 
 export function Main() {
     const [popup, setPopup] = useState(null);
@@ -18,9 +19,17 @@ export function Main() {
     const editAvatarPopup = { title: "Editar imagen de perfil", children: <EditAvatar onEditAvatar={handleEditAvatar}/> };
     const [selectedCard, setSelectedCard] = useState(null);
     const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-    
+    const jwt = getToken();
+    const apiAcces = new Api({
+              baseUrl: "https://se-register-api.en.tripleten-services.com/v1",
+              headers: {
+                Authorization: `Bearer ${jwt}`, 
+                'Content-Type': 'application/json'
+              }
+            });
     
     useEffect(() =>{
+        
         const loadCards = async () => {
             try {
                 const cardsData = await apiAcces.getInitialCards();
@@ -90,7 +99,7 @@ export function Main() {
             ? apiAcces.dislikeCard(card._id) 
             : apiAcces.likeCard(card._id));
         
-        // Asegúrate de mantener los likes existentes si no vienen en la respuesta
+        
         setCards(cards.map(c => c._id === card._id 
             ? { ...newCard, likes: newCard.likes || card.likes || [] } 
             : c));
