@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import  Api  from '../../utils/Api.js';
 import {IMAGES} from '../../utils/constants.jsx';
-import { Popup } from './components/Popup/Popup.jsx';
-import { NewCard } from './components/Popup/NewCard/NewCard.jsx';
-import { EditProfile } from './components/Popup/EditProfile/EditProfile.jsx';
-import { EditAvatar } from './components/Popup/EditAvatar/EditAvatar.jsx';
-import { ImagePopup } from './components/Popup/ImagePopup/ImagePopup.jsx';
+import { Popup } from '../Popup/Popup.jsx';
+import { NewCard } from '../Popup/NewCard/NewCard.jsx';
+import { EditProfile } from '../Popup/EditProfile/EditProfile.jsx';
+import { EditAvatar } from '../Popup/EditAvatar/EditAvatar.jsx';
+import { ImagePopup } from '../Popup/ImagePopup/ImagePopup.jsx';
 import { Card } from '../Main/components/Card/Card.jsx';
 import  CurrentUserContext  from '../../contexts/CurrentUserContext.js';
 import { setToken, getToken} from "../../utils/token";
@@ -22,9 +22,12 @@ export function Main() {
     const jwt = getToken();
     const apiAcces = new Api({
               baseUrl: "https://se-register-api.en.tripleten-services.com/v1",
+              
               headers: {
+                Accept: "application/json",
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${jwt}`, 
-                'Content-Type': 'application/json'
+                    
               }
             });
     
@@ -51,7 +54,9 @@ export function Main() {
             .catch(error => console.error('Error al añadir card:', error));
     }
     function handleUpdateUser(userData) {
+        
     apiAcces.updateUserInfo(userData.name, userData.about)
+    
         .then(updatedUser => {
             setCurrentUser(prevUser => ({
                 ...prevUser, 

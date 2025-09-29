@@ -6,6 +6,8 @@ import addPlaceIcon from '../images/addPlace.png'
 import deleteButton from '../images/Trash.png'
 import likeButton from '../images/btn-like-nr.png'
 import dislikeButton from '../images/btn-like-ac.png'
+import imgCorrect from '../images/imgCorrect.png'
+import imgError from '../images/imgError.png'
 
 export const IMAGES = {
   logo,
@@ -15,5 +17,7 @@ export const IMAGES = {
   addPlaceIcon,
   deleteButton,
   likeButton,
-  dislikeButton
+  dislikeButton,
+  imgCorrect,
+  imgError
 };

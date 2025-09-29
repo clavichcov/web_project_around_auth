@@ -20,19 +20,16 @@ export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
     
-  const handleRegistration = ({
-    email,
-    password,
-    
-  }) => {
-    
-      auth.register(email, password )
-        .then(() => {
-          navigate("/signin");
+  const handleRegistration = ({ email, password }) => {
+    return auth.register(email, password)
+        .then((data) => {
+            return data;
         })
-        .catch(console.error);
-    
-  }
+        .catch(error => {
+            console.error("Error en registro:", error);
+            throw error;
+        });
+}
 
   const handleLogin = ({email, password}) => {
     if (!email || !password) {
@@ -44,6 +41,10 @@ export default function App() {
           if (data.token) {
             setToken(data.token);
             setIsLoggedIn(true);
+            setCurrentUser({
+              username: email,
+              email: email
+            });
             const redirectPath = location.state?.from?.pathname || "/users/me";
             navigate(redirectPath);
           }
@@ -60,20 +61,20 @@ export default function App() {
       return new Api({
         baseUrl: "https://se-register-api.en.tripleten-services.com/v1",
         headers: {
-          Authorization: 
-          `Bearer ${jwt}`, 
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`, 
         }
       });
     };
 
     useEffect (() => {
       const apiInstance = createApiAcces();
-      if (!apiInstance) return;
+      if (!apiInstance ) return;
       apiInstance
         .getUserInfo()
         .then ((userData) => {
-          console.log('👤 User info response:', userData.data.email);
+          console.log('👤 User info response:', userData);
           setCurrentUser({
             username: userData.data.email,
             email:userData.data.email});
@@ -140,10 +141,4 @@ export default function App() {
     
   )
 }
-/*
-<div className="page">
-            <Header></Header>
-            <Main></Main>
-            <Footer></Footer> 
-        </div>
-*/
+

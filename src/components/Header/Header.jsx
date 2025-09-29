@@ -10,8 +10,9 @@ export function Header({createApiAcces}) {
     const location = useLocation();
     function signOut () {
         removeToken();
-        navigate("/signin");
         setIsLoggedIn(false);
+        setCurrentUser(null);
+        navigate("/signin");
     }
     function pagePath () {
         if (location.pathname === "/signup") {

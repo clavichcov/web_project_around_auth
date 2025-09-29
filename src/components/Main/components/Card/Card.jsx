@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import {IMAGES} from '../../../../utils/constants.jsx';
-import { Popup } from '../Popup/Popup.jsx';
-import { RemoveCard } from "../Popup/RemoveCard/RemoveCard.jsx";
+import { Popup } from '../../../Popup/Popup.jsx';
+import { RemoveCard } from "../../../Popup/RemoveCard/RemoveCard.jsx";
 import  CurrentUserContext  from '../../../../contexts/CurrentUserContext.js';
 export function Card({ card = {}, onDelete, onCardClick, onLike }) {
     //const { card, onDelete, onCardClick, onLike } = props;

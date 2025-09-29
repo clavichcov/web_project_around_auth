@@ -1,16 +1,22 @@
 import { IMAGES } from "../../utils/constants";
+import { Popup } from "../Popup/Popup.jsx";
 import {Header} from '../Header/Header.jsx';
-import { Link } from 'react-router-dom';
+import { InfoTooltip } from "../Popup/InfoTooltip/InfoTooltip.jsx";
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
 
+
 export function Register({ handleRegistration}) {
-    
-        const [data, setData] = useState({
-            email: "",
-            password: "",
-            confirmPassword: "",
+    const navigate = useNavigate();
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+            
     });
+    const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevData) => ({
@@ -20,8 +26,27 @@ export function Register({ handleRegistration}) {
      };
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleRegistration(data);
+        handleRegistration(data)
+            .then(() => {
+                setIsSuccess(true);
+                setIsInfoTooltipOpen(true);
+                setTimeout(() => {
+                    navigate("/signin");
+                }, 5000);
+            })
+            .catch(() => {
+                setIsSuccess(false);
+                setIsInfoTooltipOpen(true);
+            });
     };
+
+    const closeInfoTooltip = () => {
+        setIsInfoTooltipOpen(false);
+    };
+
+
+    
+
     
     return (
         <>  
@@ -56,6 +81,12 @@ export function Register({ handleRegistration}) {
                     </form>
                 </div>
             </div>
+            {/* Popup con InfoTooltip - Solo se muestra cuando isInfoTooltipOpen es true */}
+            {isInfoTooltipOpen && (
+                <Popup onClose={closeInfoTooltip} title="">
+                    <InfoTooltip isSuccess={isSuccess} />
+                </Popup>
+            )}
         </>
         
     );

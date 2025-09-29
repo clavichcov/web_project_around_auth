@@ -24,10 +24,7 @@ export class Api {
                 }
                 return Promise.reject(`Error: ${res.status}`);
             });
-        /*.catch(error => {
-            console.error('Error en la petición:', error);
 
-        });*/
 
     }
     getUserInfo() {
